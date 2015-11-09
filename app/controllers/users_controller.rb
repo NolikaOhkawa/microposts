@@ -16,6 +16,13 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+    
+    def edit
+    end
+    
+    def upload
+    end
+    
   end
   
   private
