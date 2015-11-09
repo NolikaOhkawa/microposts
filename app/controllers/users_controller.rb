@@ -18,6 +18,12 @@ class UsersController < ApplicationController
     end
     
     def edit
+      @message = User.new(edit_params)
+      if @user.save
+        flash[:success] = "Congratualeions on your edit!"
+        redirect_to @user
+      else
+        render 'edit'
     end
     
     def upload
@@ -30,4 +36,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+  
+  def edit_params
+    params.require(:user).permit(:url, :email, :password)
 end

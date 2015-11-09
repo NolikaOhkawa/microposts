@@ -1,0 +1,14 @@
+<%= form_for(Users.new) do |f| %>
+    E-mail
+    <%= f.text_field :email %>
+        
+    URL
+    <%= f.text_field :url %>
+        
+    Mention
+    <%= f.text_area :body %>
+    <%= f.submit %>
+<%= end %>
+    
+    
+    
