@@ -16,7 +16,8 @@
         <% end %>
             <br>
             <span class="label label-info">url</span>
-            <%= link_to @user.url %>
+            <%= link_to @user.url, @user.url, target: '_blank' %>
+            <%#= aタグに入るのが1つめの引数で、hrefに入るのが2つめの引数 %>
             <br>
     </div>
 </div>
