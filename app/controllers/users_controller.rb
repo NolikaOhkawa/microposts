@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   
   def show
-    @user = User.find(params[:id])
+    @users= User.all
   end
   
   def new
@@ -11,32 +12,43 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Welcome to the Sample App!"
+      session[:user_id] = @user.id
+      flash[:success] = "Welcome to the Sample App! u're logged in as #{@user.name}"
       redirect_to @user
     else
       render 'new'
     end
+  end
     
-    def edit
-      @message = User.new(edit_params)
-      if @user.save
-        flash[:success] = "Congratualeions on your edit!"
-        redirect_to @user
-      else
-        render 'edit'
+  def edit
+  end
+    
+  def update
+    if @user.update(user_params)
+      flash[:success] = "Congratulations on your edit!"
+      redirect_to @user
+      # redirect_to user_path(@user) と同じ意味
+    else
+      render 'edit'
     end
-    
-    def upload
+
+  end
+
+  def destroy
+    if @user.destroy
+      flash[:info] = "delete your account"
+      redirect_to root_path
     end
-    
   end
   
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :url)
   end
   
-  def edit_params
-    params.require(:user).permit(:url, :email, :password)
+  def set_user
+    @user = User.find(params[:id])
+  end
+
 end

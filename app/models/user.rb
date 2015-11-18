@@ -5,5 +5,7 @@ class User < ActiveRecord::Base
     validates :email, presence: true, length: { maximum: 255 },
                       format: { with: VALID_EMAIL_REGEX },
                       uniqueness: { case_sensitive: false }
+    validates :url, presence: true, length: { minimum: 10 }, on: :update
+    VALID_URL_REGEX = /(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/
     has_secure_password
 end

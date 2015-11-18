@@ -6,3 +6,26 @@
 <%= @user.name %>
 
 </h1>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Profile
+    </div>
+
+    <div class="panel-body">
+            <span class="label label-success">email</span>
+            <% if logged_in? %>
+            <%= current_user.email %>
+        <% end %>
+            <br>
+            <span class="label label-info">url</span>
+            <%= @user.url %>
+            <br>
+    </div>
+</div>
+<% if logged_in? %>
+    <div class="row">
+        <p><%= link_to "edit profile", edit_user_path(@user), class: "btn btn-large btn-primary"%></p>
+        <p><%= link_to "delete account?", user_path(@user), method: :delete, data: { confirm: '削除してもよろしいですか？' } %></p>
+    </div>
+<% end %>
